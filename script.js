@@ -16,7 +16,6 @@ function addTask(){
     inputBox.value = "";
     saveData();
 }
-
 list.addEventListener("click", function(e){
     if(e.target.tagName === "LI"){
         e.target.classList.toggle("todo-app__list--check");
@@ -35,5 +34,4 @@ function saveData(){
 function showTask(){
     list.innerHTML=localStorage.getItem("data");
 }
-
 showTask();
