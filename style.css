@@ -77,6 +77,7 @@ ul li::before{
     background-position: center;
     top: 10px;
     left: 8px;
+    cursor: grab;
 }
 ul li.todo-app__list--check{
     color: #555;
@@ -100,4 +101,14 @@ ul li span{
 ul li span:hover{
     background: #edeef0;
 }
-
+.dragging {
+    opacity: 0.5;
+}
+.todo-app__time {
+    font-size: 12px;
+    color: gray;
+    width: auto;
+    height: auto;
+    margin-right: 50px;
+    text-align: center;
+}
