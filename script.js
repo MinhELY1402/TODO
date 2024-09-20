@@ -1,18 +1,27 @@
 const inputBox = document.getElementById("todo-app__row--input-box");
+const typeBox = document.getElementById("todo-app__row--type-box");  // Trường loại công việc
 const list = document.getElementById("todo-app__list");
 let draggedItem = null;  // Biến lưu trữ mục đang kéo
 
 // Hàm thêm task
 function addTask(){
-    if(inputBox.value === ''){
-        alert("Nhập task cần làm đê!!");
+    if(inputBox.value === '' || typeBox.value === ''){
+        alert("Nhập task cần làm và loại task đê!!");
     }
     else{
         let li = document.createElement("li");
         li.className = "todo-app__list--item";
         li.setAttribute("draggable", "true");
-        li.innerHTML = inputBox.value;
-        list.appendChild(li);
+        // Thêm tên task
+        let taskName = document.createElement("div");
+        taskName.innerHTML = inputBox.value;
+        taskName.classList.add("todo-app__task-name");
+        li.appendChild(taskName);
+        // Thêm loại công việc
+        let taskType = document.createElement("span");
+        taskType.innerHTML = ` [${typeBox.value}]`;
+        taskType.classList.add("todo-app__task-type");
+        li.appendChild(taskType);
         // Thêm thời gian tạo task
         let timeSpan = document.createElement("span");
         timeSpan.className = "todo-app__time";
@@ -22,20 +31,22 @@ function addTask(){
         // Thêm span để xóa
         let span = document.createElement("span");
         span.innerHTML = "X";
+        span.classList.add("delete-btn");
         li.appendChild(span);
         // Kích hoạt lại chức năng kéo và thả
+        list.appendChild(li);
         addDragAndDropEvents(li);
         saveData();
     }
     inputBox.value = "";
+    typeBox.value = "";  // Xóa trường nhập loại công việc sau khi thêm
 }
 // Thêm sự kiện khi click vào danh sách (để xóa hoặc đánh dấu hoàn thành)
-list.addEventListener("click", function(e){
-    if(e.target.tagName === "LI"){
+list.addEventListener("click", function (e) {
+    if (e.target.tagName === "LI" || e.target.classList.contains("todo-app__task-name")) {
         e.target.classList.toggle("todo-app__list--check");
         saveData();
-    }   
-    else if(e.target.tagName === "SPAN"){
+    } else if (e.target.tagName === "SPAN" && e.target.classList.contains("delete-btn")) {
         e.target.parentElement.remove();
         saveData();
     }
@@ -88,4 +99,30 @@ function getDragAfterElement(container, y) {
             return closest;
         }
     }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
+// Lọc công việc theo trạng thái
+function filterTasks(status) {
+    const tasks = list.querySelectorAll("li");
+    tasks.forEach(task => {
+        switch (status) {
+            case 'all':
+                task.style.display = "block";
+                break;
+            case 'completed':
+                if (task.classList.contains("todo-app__list--check")) {
+                    task.style.display = "block";
+                } else {
+                    task.style.display = "none";
+                }
+                break;
+            case 'incomplete':
+                if (!task.classList.contains("todo-app__list--check")) {
+                    task.style.display = "block";
+                } else {
+                    task.style.display = "none";
+                }
+                break;
+        }
+    });
 }

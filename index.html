@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TODO List</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,7 +12,13 @@
             <h2 class="todo-app__head">To-Do List <img class="todo-app__head--img" src="images/icon.png"></h2>
             <div class="todo-app__row">
                 <input type="text" id="todo-app__row--input-box" placeholder="Nhập hoạt động">
+                <input type="text" id="todo-app__row--type-box" placeholder="Loại công việc">
                 <button class="todo-app__row--btn" onclick="addTask()">Thêm</button>
+            </div>
+            <div class="todo-app__filter">
+                <button onclick="filterTasks('all')">Tất cả</button>
+                <button onclick="filterTasks('completed')">Đã hoàn thành</button>
+                <button onclick="filterTasks('incomplete')">Chưa hoàn thành</button>
             </div>
             <ul id="todo-app__list">
                 <!-- <li class="todo-app__list--check todo-app__list--item" draggable="true">Task 1</li>

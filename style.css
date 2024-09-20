@@ -15,7 +15,7 @@
 }
 .todo-app{
     width: 100%;
-    max-width: 540px;
+    max-width: 600px;
     background: #fff;
     margin: 100px auto 20px;
     padding: 40px 30px 70px;
@@ -111,4 +111,42 @@ ul li span:hover{
     height: auto;
     margin-right: 50px;
     text-align: center;
+}
+#todo-app__row--type-box {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 10px;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.todo-app__filter button {
+    background-color: #ff5945;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.todo-app__filter button:hover {
+    background-color: #ff402e;
+}
+
+.todo-app__task-name {
+    font-weight: normal;
+}
+
+.todo-app__task-type {
+    margin-right: 250px;
+}
+
+.delete-btn {
+    color: red;
+    cursor: pointer;
+    font-weight: bold;
+    margin-left: 10px;
 }
